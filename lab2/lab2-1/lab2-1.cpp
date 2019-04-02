@@ -3,18 +3,22 @@
 
 using namespace std;
 
-
-
 int main()
 {
-	int k = 0, f = 0, minus = 0;
+	int k = 0, f = 0;
 	int *arr = new int[255];
 	char *in = new char[255];
 	cout << "Input constants: " << endl;
 	do {
 		cin.getline(in, 200);
 		arr[k] = 0;
-		minus = 0;
+		int minus = 0;
+		for (int i = 0; i < strlen(in); i++) {
+			if (in[i] < '0' && in[i] > '9') {
+					cout << "Wrong input!";
+					break;
+			}
+		}	
 		for (int i = 0; i < strlen(in); i++) {
 			if (in[0] == 'e' && in[1] == 'n' && in[2] == 'd') {
 				f = 1;
@@ -34,7 +38,6 @@ int main()
 		}
 		if (minus == 1) arr[k] = (-1) * arr[k];
 		k++;
-
 	} while (f == 0);
 	for (int i = 0; i < k - 1; i++) cout << arr[i] << ' ';
 	k = k - 2;
