@@ -49,9 +49,7 @@ public:
 				head->pr = pr;
 
 			}
-			else {
-				
-			}
+			
 		}
 	}
 	void begin()
