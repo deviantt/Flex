@@ -6,6 +6,7 @@ using namespace std;
 template<class T>
 class List
 {
+private:
 	struct Elem
 	{
 		T obj;
@@ -51,32 +52,18 @@ public:
 					last = last->next;
 				}
 				else {
-					//tmp = head;
-					//tmp->obj = head->obj;
-					//tmp->prior = head->prior;
-					//while (tmp!=last) {
-					//	if (prior >= tmp->next->prior) {
-					//		tmp->next = new Elem;
-					//		tmp->next->obj = val;
-					//		tmp->next->prior = prior;
-					//		break;
-					//	}
-					//	tmp = tmp->next;
-					//}
 					for (tmp = head; tmp != last; tmp = tmp->next) {
-							if (prior >= tmp->next->prior) {
-								//tmp1 = tmp;
-								tmp->next = new Elem;
-								tmp->next->obj = val;
-								tmp->next->prior = prior;
-
-								break;
-							}
-							if (f = 1) break;
+						if (prior >= tmp->next->prior) {
+							tmp1 = new Elem;
+							tmp1->next = tmp->next;
+							tmp->next = tmp1;
+							tmp1->obj = val;
+							tmp1->prior = prior;
+							break;
+						}
 					}
 				}
 			}
-			
 		}
 	}
 	void begin()
@@ -86,6 +73,9 @@ public:
 	void next()
 	{
 		iterator = iterator->next;
+	}
+	unsigned int showprior() {
+		return iterator->prior;
 	}
 	T& getCurrent()
 	{
@@ -109,17 +99,20 @@ public:
 
 int main()
 {
+	int x;
 	List<int> list;
-	list.Add(2,2);
-	list.Add(4,4);
-	list.Add(5,5);
-	list.Add(1,1);
+	list.Add(2, 2);
+	list.Add(4, 4);
+	list.Add(1, 1);
 	list.Add(3, 3);
+	list.Add(5, 5);
+	//for (int i = 0; i < 100; i++) {
+	//	x = rand() % 1000;
+	//	list.Add(x, x);
+	//}
 	//54321 output
 	for (list.begin(); !list.isEnd(); list.next())
 	{
-		cout << list.getCurrent() << ' ';
+		cout << list.getCurrent() << ' ' << list.showprior() << endl;
 	}
-	cout << endl;
-	list.show();
 }
